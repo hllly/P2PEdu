@@ -5,7 +5,8 @@
 import UIKit
 
 private struct Constants {
-    static let Height = 40.0
+    static let Height = 60.0
+    static let Width = 500.0
 }
 
 class RoundedButton: UIButton {
@@ -34,8 +35,8 @@ class RoundedButton: UIButton {
         }
 
         setTitleColor(titleColor, for:UIControlState())
-        titleLabel?.font = UIFont.systemFont(ofSize: 18.0)
-        layer.cornerRadius = 5.0
+        titleLabel?.font = UIFont.systemFont(ofSize: 25.0)
+        layer.cornerRadius = 25.0
         layer.masksToBounds = true
 
         let bgImage = UIImage.imageWithColor(bgColor, size: CGSize(width: 1.0, height: 1.0))

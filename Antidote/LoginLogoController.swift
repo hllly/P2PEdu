@@ -6,8 +6,8 @@ import UIKit
 import SnapKit
 
 private struct PrivateConstants {
-    static let LogoTopOffset = -200.0
-    static let LogoHeight = 100.0
+    static let LogoTopOffset = -300.0
+    static let LogoHeight = 200.0
 }
 
 class LoginLogoController: LoginBaseController {
@@ -49,12 +49,16 @@ class LoginLogoController: LoginBaseController {
 private extension LoginLogoController {
     func createMainContainerView() {
         mainContainerView = UIView()
-        mainContainerView.backgroundColor = .clear
+        //登陆页背景色
+        //mainContainerView.backgroundColor = .clear
+        mainContainerView.backgroundColor = UIColor.white   //add by hll
         view.addSubview(mainContainerView)
     }
 
     func createLogoImageView() {
-        let image = UIImage(named: "login-logo")
+        //登陆页面logo
+        //let image = UIImage(named: "login-logo")
+        let image = UIImage(named: "logo")  //add by hll
 
         logoImageView = UIImageView(image: image)
         logoImageView.contentMode = .scaleAspectFit

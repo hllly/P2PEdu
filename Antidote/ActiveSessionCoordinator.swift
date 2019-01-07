@@ -124,7 +124,6 @@ extension ActiveSessionCoordinator: TopCoordinatorProtocol {
                 window.rootViewController = iPhone.tabBarController
             case .iPad:
                 primaryIpadControllerShowFriends(iPad.primaryController)
-
                 window.rootViewController = iPad.splitController
         }
 

@@ -12,37 +12,37 @@
 */
 
 /* Login screen text */
-"login_or_label" = "or";
+"login_or_label" = "或者";
 /* Login screen text */
-"create_account" = "Create Account";
+"create_account" = "创建账号";
 /* Login screen text */
-"import_profile" = "Import Profile";
+"import_profile" = "导入凭证";
 /* Password field */
-"password" = "Password";
+"password" = "密码";
 /* Login button */
-"log_in" = "Log In";
+"log_in" = "登   录";
 /* Login screen text */
-"create_profile" = "Create profile";
+"create_profile" = "创建账号";
 /* Login screen text */
-"import_to_antidote" = "Import to Antidote";
+"import_to_antidote" = "找回密码";
 /* Login screen text */
-"create_account_username_title" = "How contacts will see you?";
+"create_account_username_title" = "如何称呼您?  必填";
 /* Login screen text */
-"create_account_username_placeholder" = "Username";
+"create_account_username_placeholder" = "用户名";
 /* Login screen text */
-"create_account_profile_title" = "How to call this profile?";
+"create_account_profile_title" = "该账号叫什么?  选填";
 /* Login screen text */
-"create_account_profile_placeholder" = "Profile name";
+"create_account_profile_placeholder" = "凭证名称";
 /* Login screen text */
-"create_account_profile_hint" = "e.g. Home, iPhone";
+"create_account_profile_hint" = "比如iphone,ipad";
 /* Login screen text */
-"set_password_title" = "Set Password";
+"set_password_title" = "设置密码";
 /* Login screen text */
-"set_password_hint" = "Password is required to protect your data. Keep it safe - once lost it cannot be restored.";
+"set_password_hint" = "该密码对于您的数据保护很重要.";
 /* Login button */
-"create_account_next_button" = "Next";
+"create_account_next_button" = "下一步";
 /* Login button */
-"create_account_go_button" = "Go";
+"create_account_go_button" = "完   成";
 /* Default status message */
 "default_user_status_message" = "Toxing on Antidote";
 
@@ -85,7 +85,7 @@
 "connecting_label" = "Connecting...";
 
 /* Tab name and screen name */
-"contacts_title" = "Contacts";
+"contacts_title" = "联系人";
 /* Tab name and screen name */
 "chats_title" = "Chats";
 /* Tab name and screen name */
@@ -241,9 +241,9 @@
 /* Change password text */
 "new_password" = "New Password";
 /* Change password text */
-"repeat_password" = "Repeat Password";
+"repeat_password" = "确认密码";
 /* Change password button */
-"change_password_done" = "Done";
+"change_password_done" = "完  成";
 /* Change password error */
 "password_is_empty_error" = "Password should be non-empty";
 /* Change password error */

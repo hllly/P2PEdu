@@ -18,24 +18,26 @@ colors:
   yellow: DECF4E
   red: E94F42
   palered: C56258
+  nuanhuang: FEDC00
+  lightblack: "555555"
 
 values:
   login-background: white
   login-gradient: lightblue
   login-tox-logo: simpleblue
-  login-button-text: white
-  login-button-background: simpleblue
+  login-button-text: lightblack
+  login-button-background: nuanhuang
   login-description-label: white
   login-form-background: white
-  login-form-text: black
-  login-link-color: white
+  login-form-text: lightblack
+  login-link-color: simpleblue
 
   # Color used for fullscreen translucent views background, e.g. fullscreen picker
   translucent-background: transparent_white
 
   # normal background color used all over application
   normal-background: white
-  normal-text: black
+  normal-text: lightblack
   link-text: simpleblue
   connecting-background: simpleblue
   connecting-text: white

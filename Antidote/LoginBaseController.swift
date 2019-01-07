@@ -8,12 +8,12 @@ import SnapKit
 class LoginBaseController: KeyboardNotificationController {
     struct Constants {
         static let HorizontalOffset = 40.0
-        static let VerticalOffset = 40.0
-        static let SmallVerticalOffset = 8.0
+        static let VerticalOffset = 20.0
+        static let SmallVerticalOffset = 18.0
 
-        static let TextFieldHeight: CGFloat = 40.0
+        static let TextFieldHeight: CGFloat = 55.0
 
-        static let MaxFormWidth = 350.0
+        static let MaxFormWidth = 500.0
 
         static let GradientHeightPercentage: CGFloat = 0.4
     }

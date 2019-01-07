@@ -56,14 +56,14 @@ private extension iPadFriendsButton {
         badgeLabel.textColor = theme.colorForType(.TabBadgeText)
         badgeLabel.textAlignment = .center
         badgeLabel.backgroundColor = .clear
-        badgeLabel.font = UIFont.antidoteFontWithSize(14.0, weight: .light)
+        badgeLabel.font = UIFont.antidoteFontWithSize(20.0, weight: .light)
         badgeContainer.addSubview(badgeLabel)
 
         button = UIButton(type: .system)
         button.contentHorizontalAlignment = .left
         button.contentEdgeInsets.left = 20.0
         button.titleEdgeInsets.left = 20.0
-        button.titleLabel?.font = UIFont.systemFont(ofSize: 18.0)
+        button.titleLabel?.font = UIFont.systemFont(ofSize: 25.0)
         button.setTitle(String(localized: "contacts_title"), for: UIControlState())
         button.setImage(UIImage(named: "tab-bar-friends"), for: UIControlState())
         button.addTarget(self, action: #selector(iPadFriendsButton.buttonPressed), for: .touchUpInside)

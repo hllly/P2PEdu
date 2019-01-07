@@ -19,7 +19,7 @@ class LoginFormController: LoginLogoController {
         static let IconContainerHeight: CGFloat = Constants.TextFieldHeight
 
         static let FormOffset = 20.0
-        static let FormSmallOffset = 10.0
+        static let FormSmallOffset = 25.0
 
         static let AnimationDuration = 0.3
     }
@@ -57,14 +57,11 @@ class LoginFormController: LoginLogoController {
 
     override func loadView() {
         super.loadView()
-
         createGestureRecognizers()
         createFormViews()
         createLoginButton()
         createBottomButtons()
-
         installConstraints()
-
         updateFormAnimated(false)
     }
 
@@ -158,13 +155,25 @@ private extension LoginFormController {
         profileFakeTextField = UITextField()
         profileFakeTextField.leftViewMode = .always
         profileFakeTextField.leftView = iconContainerWithImageName("login-profile-icon")
-        profileFakeTextField.borderStyle = .roundedRect
-        profileFakeTextField.layer.borderColor = theme.colorForType(.LoginButtonBackground).cgColor
-        profileFakeTextField.layer.borderWidth = 0.5
-        profileFakeTextField.layer.masksToBounds = true
-        profileFakeTextField.layer.cornerRadius = 6.0
+        
+        //modify by hll
+        //profileFakeTextField.borderStyle = .roundedRect
+        //profileFakeTextField.layer.borderColor = theme.colorForType(.LoginButtonBackground).cgColor
+        //profileFakeTextField.layer.borderWidth = 0.5
+        //profileFakeTextField.layer.masksToBounds = true
+        //profileFakeTextField.layer.cornerRadius = 6.0
+        profileFakeTextField.borderStyle = .none
+        profileFakeTextField.layer.cornerRadius = 10.0
+        profileFakeTextField.font = UIFont(name:"Heiti SC", size:20)
+        
         profileFakeTextField.isAccessibilityElement = false
         profileFakeTextField.accessibilityElementsHidden = true
+        
+        //add by hll
+        let profileLineView = UIView(frame:CGRect(x:0,y:55 - 1, width:500, height:1))
+        profileLineView.backgroundColor = UIColor(red: 0xfe/255, green: 0xdc/255, blue: 0x00/255, alpha: 1)
+        profileFakeTextField.addSubview(profileLineView)
+        
         formView.addSubview(profileFakeTextField)
 
         profileButton = UIButton()
@@ -177,13 +186,24 @@ private extension LoginFormController {
         passwordField.placeholder = String(localized:"password")
         passwordField.isSecureTextEntry = true
         passwordField.returnKeyType = .go
-        passwordField.borderStyle = .roundedRect
+        
+        //passwordField.borderStyle = .roundedRect
+        passwordField.borderStyle = .none
+        
         passwordField.leftViewMode = .always
         passwordField.leftView = iconContainerWithImageName("login-password-icon")
-        passwordField.layer.borderColor = theme.colorForType(.LoginButtonBackground).cgColor
-        passwordField.layer.borderWidth = 0.5
-        passwordField.layer.masksToBounds = true
-        passwordField.layer.cornerRadius = 6.0
+        //passwordField.layer.borderColor = theme.colorForType(.LoginButtonBackground).cgColor
+        //passwordField.layer.borderWidth = 0.5
+        //passwordField.layer.masksToBounds = true
+        
+        //modify by hll
+        passwordField.layer.cornerRadius = 10.0
+        passwordField.placeholder = "密码"
+        passwordField.font = UIFont(name:"Heiti SC", size:20)
+        let passwordLineView = UIView(frame:CGRect(x:0,y:55 - 1, width:500, height:1))
+        passwordLineView.backgroundColor = UIColor(red: 0xfe/255, green: 0xdc/255, blue: 0x00/255, alpha: 1)
+        passwordField.addSubview(passwordLineView)
+        
         formView.addSubview(passwordField)
     }
 
@@ -206,7 +226,7 @@ private extension LoginFormController {
 
         orLabel = UILabel()
         orLabel.text = String(localized: "login_or_label")
-        orLabel.textColor = theme.colorForType(.LoginButtonBackground)
+        orLabel.textColor = UIColor.gray
         orLabel.backgroundColor = .clear
         bottomButtonsContainer.addSubview(orLabel)
 
@@ -282,7 +302,7 @@ private extension LoginFormController {
         container.backgroundColor = .clear
         container.addSubview(imageView)
 
-        container.frame.size.width = PrivateConstants.IconContainerWidth
+        container.frame.size.width = PrivateConstants.IconContainerWidth + 20
         container.frame.size.height = PrivateConstants.IconContainerHeight
 
         imageView.frame.origin.x = PrivateConstants.IconContainerWidth - imageView.frame.size.width
@@ -295,7 +315,7 @@ private extension LoginFormController {
         let button = UIButton()
         button.setTitle(title, for: UIControlState())
         button.setTitleColor(theme.colorForType(.LoginLinkColor), for: UIControlState())
-        button.titleLabel?.font = UIFont.systemFont(ofSize: 16.0)
+        button.titleLabel?.font = UIFont.systemFont(ofSize: 20.0)
         button.addTarget(self, action: action, for: .touchUpInside)
 
         return button
