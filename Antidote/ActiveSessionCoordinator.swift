@@ -124,7 +124,11 @@ extension ActiveSessionCoordinator: TopCoordinatorProtocol {
                 window.rootViewController = iPhone.tabBarController
             case .iPad:
                 primaryIpadControllerShowFriends(iPad.primaryController)
-                window.rootViewController = iPad.splitController
+                //window.rootViewController = iPad.splitController
+                //window.rootViewController = iPad.primaryController
+                window.rootViewController = EduMainTabbarController()
+                window.backgroundColor = UIColor.cyan
+                //window.rootViewController?.view.backgroundColor = UIColor(red: 0xfe/255, green: 0xdc/255, blue: 0x00/255, alpha: 1)
         }
 
         var settingsOptions: CoordinatorOptions?
