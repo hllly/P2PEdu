@@ -33,16 +33,16 @@ class EduMainTabbarItem: UIControl {
         
         //布局使用的参数
         let defaulutLabelH:CGFloat = 20.0 //文字的高度
-        let imgTop:CGFloat = -10
-        let imgWidth:CGFloat = 50
+        let imgTop:CGFloat = 10
+        let imgWidth:CGFloat = 80
         let imgLeft:CGFloat = (frame.size.width - imgWidth)/2
-        let imgHeight:CGFloat  = frame.size.height - defaulutLabelH - imgTop
+        let imgHeight:CGFloat  = frame.size.height - defaulutLabelH - imgTop + 18
         //图片
         imgView = UIImageView(frame: CGRect(x: imgLeft, y: imgTop, width:imgWidth, height:imgHeight))
         imgView.image = UIImage(named: itemDic["NormalImg"]!)
         imgView.contentMode = UIViewContentMode.scaleAspectFit
         //title
-        titleLabel = UILabel(frame:CGRect(x: 0, y: frame.height - defaulutLabelH, width: frame.size.width, height: defaulutLabelH))
+        titleLabel = UILabel(frame:CGRect(x: 0, y: frame.height - defaulutLabelH + 25, width: frame.size.width, height: defaulutLabelH))
         titleLabel.text = itemDic["Title"]!
         titleLabel.textAlignment = NSTextAlignment.center
         titleLabel.font = UIFont.systemFont(ofSize: 14)

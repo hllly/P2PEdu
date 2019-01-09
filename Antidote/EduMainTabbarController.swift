@@ -23,7 +23,7 @@ class EduMainTabbarController: UITabBarController, EduMainTabbarDelegate {
         //4.创建自定义TabBarView
         self.createMainTabbarView()
     }
-    
+ 
     required init?(coder aDecoder: NSCoder){
         fatalError("init(coder:) has not been implemented")
     }
@@ -54,30 +54,30 @@ class EduMainTabbarController: UITabBarController, EduMainTabbarDelegate {
         for dictionary in self.tarbarConfigArr{
             controllerNameArray.append(dictionary["ClassName"]!);
             controllerTitle.append(dictionary["Title"]!)
-            
-            guard controllerNameArray.count > 0 else{
-                print("error:控制器数组为空")
-                return
-            }
-            //初始化导航控制器数组
-            var nvcArray = [EduBaseNavigationController]()
-            //在Swift中, 通过字符串创建一个类, 那么必须加上命名空间clsName
-            let clsName = Bundle.main.infoDictionary!["CFBundleExecutable"] as! String
-            for i in 0...controllerNameArray.count-1 {
-                //动态获取的命名空间是不包含.的, 所以需要我们自己手动拼接
-                let anyClass: AnyClass? = NSClassFromString(clsName + "." + controllerNameArray[i])
-                //将AnyClass类型转换为BaseViewController类型，
-                //因为Swift中通过一个Class来创建一个对象, 必须告诉系统这个Class的确切类型
-                if let vcClassType = anyClass as? EduBaseController.Type {
-                    let viewcontroller = vcClassType.init()
-                    viewcontroller.title = controllerTitle[i]
-                    let nav = EduBaseNavigationController(rootViewController:viewcontroller)
-                    nvcArray.append(nav)
-                }
-            }
-            //设置标签栏控制器数组
-            self.viewControllers = nvcArray
         }
+        
+        guard controllerNameArray.count > 0 else{
+            print("error:控制器数组为空")
+            return
+        }
+        //初始化导航控制器数组
+        var nvcArray = [EduBaseNavigationController]()
+        //在Swift中, 通过字符串创建一个类, 那么必须加上命名空间clsName
+        let clsName = Bundle.main.infoDictionary!["CFBundleExecutable"] as! String
+        for i in 0...controllerNameArray.count-1 {
+            //动态获取的命名空间是不包含.的, 所以需要我们自己手动拼接
+            let anyClass: AnyClass? = NSClassFromString(clsName + "." + controllerNameArray[i])
+            //将AnyClass类型转换为BaseViewController类型，
+            //因为Swift中通过一个Class来创建一个对象, 必须告诉系统这个Class的确切类型
+            if let vcClassType = anyClass as? EduBaseController.Type {
+                let viewcontroller = vcClassType.init()
+                viewcontroller.title = controllerTitle[i]
+                let nav = EduBaseNavigationController(rootViewController:viewcontroller)
+                nvcArray.append(nav)
+            }
+        }
+        //设置标签栏控制器数组
+        self.viewControllers = nvcArray
     }
     
     
@@ -89,6 +89,10 @@ class EduMainTabbarController: UITabBarController, EduMainTabbarDelegate {
         //3.使用得到的frame，和plist数据创建自定义标签栏
         mainTabbarView = EduMainTabbarView(frame: tabbarRect,tabbarConfigArr:tarbarConfigArr!);
         mainTabbarView.delegate = self
+        var frame = mainTabbarView.frame
+        frame.size.height = 85
+        frame.origin.y = self.view.frame.size.height - 85
+        mainTabbarView.frame = frame
         self.view.addSubview(mainTabbarView)
     }
     

@@ -18,12 +18,12 @@ class EduMainTabbarView: UIView {
     
     init(frame: CGRect,tabbarConfigArr:[Dictionary<String,String>]) {
         super.init(frame: frame)
-        self.backgroundColor = UIColor.white
+        self.backgroundColor = UIColor(red: 0xed/255, green: 0xed/255, blue: 0xed/255, alpha: 1)
         let screenW = UIScreen.main.bounds.size.width
-        let itemWidth = screenW / CGFloat(tabbarConfigArr.count)
+        let itemWidth = screenW / CGFloat(tabbarConfigArr.count) - (screenW - 600) / 4.0
         for i in 0..<tabbarConfigArr.count{
             let itemDic = tabbarConfigArr[i];
-            let itemFrame = CGRect(x: itemWidth * CGFloat(i) , y: 0, width: itemWidth, height: frame.size.height)
+            let itemFrame = CGRect(x: (itemWidth * CGFloat(i)) + ((screenW - 600) / 2.0) , y: 0, width: itemWidth, height: frame.size.height)
             //创建Item视图
             let itemView = EduMainTabbarItem(frame: itemFrame, itemDic:itemDic, itemIndex: i)
             self.addSubview(itemView)
@@ -31,7 +31,6 @@ class EduMainTabbarView: UIView {
             //添加事件点击处理
             itemView.tag = i
             itemView.addTarget(self, action:#selector(self.didItemClick(item:))  , for: UIControlEvents.touchUpInside)
-            
             //默认点击第一个,即首页
             if i == 0 {
                 self .didItemClick(item: itemView)
@@ -52,8 +51,11 @@ class EduMainTabbarView: UIView {
             let tempItem = itemArray[i]
             if i == item.tag{
                 tempItem.currentSelectState = true
+                let name = tempItem.titleLabel.attributedText
+                print("===========s:\(i),\(name)")
             }else{
                 tempItem.currentSelectState = false
+                print("=============us:\(i)")
             }
         }
         //执行代理方法

@@ -13,10 +13,11 @@ class EduBaseNavigationController: UINavigationController {
         super.viewDidLoad()
         self.interactivePopGestureRecognizer?.delegate = self
         self.navigationBar.isTranslucent = false
-        self.navigationBar.setBackgroundImage(nil, for: UIBarMetrics.default)
+        //self.navigationBar.setBackgroundImage(nil, for: UIBarMetrics.default)
         self.navigationBar.titleTextAttributes =
             [NSAttributedStringKey.foregroundColor: UIColor(red: 0x55/255, green: 0x55/255, blue: 0x55/255, alpha:1),
              NSAttributedStringKey.font: UIFont.systemFont(ofSize: 20)]
+        self.navigationBar.barTintColor = UIColor(red: 0xfe/255, green: 0xdc/255, blue: 0x00/255, alpha:1)
     }
 }
 

@@ -12,6 +12,7 @@ class EduDocumentController: EduBaseController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.navigationItem.leftBarButtonItem = nil;
-        self.view.backgroundColor = UIColor.blue
+        self.view.backgroundColor = UIColor.white
+        print("============document")
     }
 }
