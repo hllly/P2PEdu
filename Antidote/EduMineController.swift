@@ -13,6 +13,5 @@ class EduMineController: EduBaseController {
         super.viewDidLoad()
         self.navigationItem.leftBarButtonItem = nil;
         self.view.backgroundColor = UIColor.white
-        print("============mine")
     }
 }

@@ -13,7 +13,6 @@ class EduContactController: EduBaseController {
         super.viewDidLoad()
         self.navigationItem.leftBarButtonItem = nil;
         self.view.backgroundColor = UIColor.white
-        print("============contact")
     }
     
     override func viewWillLayoutSubviews() {

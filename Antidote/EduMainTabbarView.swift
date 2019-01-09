@@ -52,10 +52,8 @@ class EduMainTabbarView: UIView {
             if i == item.tag{
                 tempItem.currentSelectState = true
                 let name = tempItem.titleLabel.attributedText
-                print("===========s:\(i),\(name)")
             }else{
                 tempItem.currentSelectState = false
-                print("=============us:\(i)")
             }
         }
         //执行代理方法
