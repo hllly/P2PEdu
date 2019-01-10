@@ -49,16 +49,18 @@ class PrimaryIpadController: UIViewController {
     fileprivate let theme: Theme
     fileprivate weak var submanagerChats: OCTSubmanagerChats!
     fileprivate weak var submanagerObjects: OCTSubmanagerObjects!
+    fileprivate weak var submanagerFiles: OCTSubmanagerFiles!
 
     fileprivate var navigationView: iPadNavigationView!
     fileprivate var friendsButton: iPadFriendsButton!
 
     fileprivate var tableManager: ChatListTableManager!
 
-    init(theme: Theme, submanagerChats: OCTSubmanagerChats, submanagerObjects: OCTSubmanagerObjects) {
+    init(theme: Theme, submanagerChats: OCTSubmanagerChats, submanagerObjects: OCTSubmanagerObjects, submanagerFiles: OCTSubmanagerFiles) {
         self.theme = theme
         self.submanagerChats = submanagerChats
         self.submanagerObjects = submanagerObjects
+        self.submanagerFiles = submanagerFiles
 
         super.init(nibName: nil, bundle: nil)
 
@@ -141,7 +143,7 @@ private extension PrimaryIpadController {
 
         tableView.register(ChatListCell.self, forCellReuseIdentifier: ChatListCell.staticReuseIdentifier)
 
-        tableManager = ChatListTableManager(theme: theme, tableView: tableView, submanagerChats: submanagerChats, submanagerObjects: submanagerObjects)
+        tableManager = ChatListTableManager(theme: theme, tableView: tableView, submanagerChats: submanagerChats, submanagerObjects: submanagerObjects, submanagerFiles: submanagerFiles)
         tableManager.delegate = self
     }
 
