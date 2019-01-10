@@ -67,6 +67,8 @@ class ActiveSessionCoordinator: NSObject {
     fileprivate let notificationCoordinator: NotificationCoordinator
     fileprivate let automationCoordinator: AutomationCoordinator
     fileprivate var callCoordinator: CallCoordinator!
+    
+    fileprivate var mainTabbar: EduMainTabbarController!
 
     /**
         One of following properties will be non-empty, depending on running device.
@@ -120,15 +122,13 @@ extension ActiveSessionCoordinator: TopCoordinatorProtocol {
             case .iPhone:
                 iPhone.tabBarController.selectedIndex = IphoneObjects.TabCoordinator.chats.rawValue
                 iPhone.chatsCoordinator.startWithOptions(nil)
-
                 window.rootViewController = iPhone.tabBarController
             case .iPad:
-                primaryIpadControllerShowFriends(iPad.primaryController)
+                //primaryIpadControllerShowFriends(iPad.primaryController)
                 //window.rootViewController = iPad.splitController
                 //window.rootViewController = iPad.primaryController
-                window.rootViewController = EduMainTabbarController()
-                //window.backgroundColor = UIColor.blue
-                //window.rootViewController?.view.backgroundColor = UIColor(red: 0xfe/255, green: 0xdc/255, blue: 0x00/255, alpha: 1)
+                self.mainTabbar = EduMainTabbarController(toxManager: self.toxManager, theme: self.theme, activeSessionCoordinatorDelegate: self)
+                window.rootViewController = self.mainTabbar
         }
 
         var settingsOptions: CoordinatorOptions?
@@ -347,14 +347,19 @@ extension ActiveSessionCoordinator: PrimaryIpadControllerDelegate {
 
 extension ActiveSessionCoordinator: ChatPrivateControllerDelegate {
     func chatPrivateControllerWillAppear(_ controller: ChatPrivateController) {
+        print("======================1")
+        mainTabbar.mainTabbarView.isHidden = true
         notificationCoordinator.banNotificationsForChat(controller.chat)
     }
 
     func chatPrivateControllerWillDisappear(_ controller: ChatPrivateController) {
+        print("======================2")
+        mainTabbar.mainTabbarView.isHidden = false
         notificationCoordinator.unbanNotificationsForChat(controller.chat)
     }
 
     func chatPrivateControllerCallToChat(_ controller: ChatPrivateController, enableVideo: Bool) {
+        print("======================3")
         callCoordinator.callToChat(controller.chat, enableVideo: enableVideo)
     }
 
@@ -363,11 +368,11 @@ extension ActiveSessionCoordinator: ChatPrivateControllerDelegate {
             dataSource: QuickLookPreviewControllerDataSource,
             selectedIndex: Int)
     {
+        print("======================4")
         let controller = QuickLookPreviewController()
         controller.dataSource = dataSource
         controller.dataSourceStorage = dataSource
         controller.currentPreviewItemIndex = selectedIndex
-
         iPad.splitController.present(controller, animated: true, completion: nil)
     }
 }
@@ -398,7 +403,7 @@ private extension ActiveSessionCoordinator {
     func createDeviceSpecificObjects() {
         switch InterfaceIdiom.current() {
             case .iPhone:
-                let chatsCoordinator = ChatsTabCoordinator(theme: theme, submanagerObjects: toxManager.objects, submanagerChats: toxManager.chats, submanagerFiles: toxManager.files)
+                let chatsCoordinator = ChatsTabCoordinator(theme: theme, submanagerObjects: toxManager.objects, submanagerChats: toxManager.chats, submanagerFiles: toxManager.files, activeSessionCoordinatorDelegate: self)
                 chatsCoordinator.delegate = self
 
                 let tabBarControllers = IphoneObjects.TabCoordinator.allValues().map { object -> UINavigationController in
@@ -433,7 +438,7 @@ private extension ActiveSessionCoordinator {
                 let splitController = UISplitViewController()
                 splitController.preferredDisplayMode = .allVisible
 
-                let primaryController = PrimaryIpadController(theme: theme, submanagerChats: toxManager.chats, submanagerObjects: toxManager.objects)
+                let primaryController = PrimaryIpadController(theme: theme, submanagerChats: toxManager.chats, submanagerObjects: toxManager.objects, submanagerFiles: toxManager.files)
                 primaryController.delegate = self
                 splitController.viewControllers = [UINavigationController(rootViewController: primaryController)]
 
@@ -534,10 +539,9 @@ private extension ActiveSessionCoordinator {
                         submanagerChats: toxManager.chats,
                         submanagerObjects: toxManager.objects,
                         submanagerFiles: toxManager.files,
-                        delegate: self,
-                        showKeyboardOnAppear: iPad.keyboardObserver.keyboardVisible)
+                        delegate: self)
+                //showKeyboardOnAppear: iPad.keyboardObserver.keyboardVisible
                 let navigation = UINavigationController(rootViewController: controller)
-
                 iPad.splitController.showDetailViewController(navigation, sender: nil)
         }
     }

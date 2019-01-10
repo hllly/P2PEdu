@@ -11,11 +11,17 @@ import UIKit
 class EduMainTabbarController: UITabBarController, EduMainTabbarDelegate {
     var tarbarConfigArr:[Dictionary<String,String>]! //标签栏配置数组，从Plist文件中读取
     var mainTabbarView: EduMainTabbarView! //自定义的底部TabbarView
+    var toxManager: OCTManager!
+    var theme: Theme!
+    var activeSessionCoordinatorDelegate: ChatPrivateControllerDelegate!
     
     //MARK: - Life Cycle
-    override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?){
+    init(toxManager: OCTManager, theme: Theme, activeSessionCoordinatorDelegate: ChatPrivateControllerDelegate){
         //1.调用父类的初始化方法
         super.init(nibName: nil, bundle: nil)
+        self.toxManager = toxManager
+        self.theme = theme
+        self.activeSessionCoordinatorDelegate = activeSessionCoordinatorDelegate
         //2.读取Plist文件,初始化标签栏配置数组
         self.tarbarConfigArr = self.getConfigArrFromPlistFile()
         //3.创建视图控制器
@@ -23,10 +29,11 @@ class EduMainTabbarController: UITabBarController, EduMainTabbarDelegate {
         //4.创建自定义TabBarView
         self.createMainTabbarView()
     }
- 
+    
     required init?(coder aDecoder: NSCoder){
         fatalError("init(coder:) has not been implemented")
     }
+    
     
     override func viewDidLoad(){
         super.viewDidLoad()
@@ -72,6 +79,7 @@ class EduMainTabbarController: UITabBarController, EduMainTabbarDelegate {
             if let vcClassType = anyClass as? EduBaseController.Type {
                 let viewcontroller = vcClassType.init()
                 viewcontroller.title = controllerTitle[i]
+                viewcontroller.getOptions(toxManager: toxManager, theme: theme, activeSessionCoordinatorDelegate:activeSessionCoordinatorDelegate)
                 let nav = EduBaseNavigationController(rootViewController:viewcontroller)
                 nvcArray.append(nav)
             }
@@ -99,5 +107,6 @@ class EduMainTabbarController: UITabBarController, EduMainTabbarDelegate {
     //MARK: - MainTabBarDelegate
     func didChooseItem(itemIndex: Int) {
         self.selectedIndex = itemIndex
+        self.tabBar.isHidden = true
     }
 }

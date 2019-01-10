@@ -87,7 +87,7 @@
 /* Tab name and screen name */
 "contacts_title" = "联系人";
 /* Tab name and screen name */
-"chats_title" = "Chats";
+"chats_title" = "通讯录";
 /* Tab name and screen name */
 "settings_title" = "Settings";
 /* Tab name and screen name */
@@ -122,7 +122,7 @@
 /* Add contat screen name */
 "add_contact_title" = "Add Contact";
 /* Add contat button */
-"add_contact_send" = "Send";
+"add_contact_send" = "发  送";
 /* Add contat placeholder text */
 "add_contact_tox_id_placeholder" = "Enter Tox ID";
 /* Add contat placeholder text */
@@ -169,7 +169,7 @@
 /* Chats screen message text */
 "chat_unanwered_call" = "Unanswered call";
 /* Chat button */
-"chat_send_button" = "Send";
+"chat_send_button" = "发  送";
 /* Chat notification toast */
 "chat_new_messages" = "↓ New messages";
 /* Chat call information */

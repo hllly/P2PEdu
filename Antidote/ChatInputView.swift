@@ -10,7 +10,7 @@ private struct Constants {
     static let Offset: CGFloat = 5.0
     static let CameraHorizontalOffset: CGFloat = 10.0
     static let CameraBottomOffset: CGFloat = -10.0
-    static let TextViewMinHeight: CGFloat = 35.0
+    static let TextViewMinHeight: CGFloat = 40.0
 }
 
 protocol ChatInputViewDelegate: class {
@@ -51,11 +51,8 @@ class ChatInputView: UIView {
 
     init(theme: Theme) {
         self.maxHeight = 0.0
-
         super.init(frame: CGRect.zero)
-
         backgroundColor = theme.colorForType(.ChatInputBackground)
-
         createViews(theme)
         installConstraints()
         updateViews()
@@ -97,7 +94,6 @@ private extension ChatInputView {
         topBorder = UIView()
         topBorder.backgroundColor = theme.colorForType(.SeparatorsAndBorders)
         addSubview(topBorder)
-
         let cameraImage = UIImage.templateNamed("chat-camera")
 
         cameraButton = UIButton()
@@ -109,7 +105,7 @@ private extension ChatInputView {
 
         textView = UITextView()
         textView.delegate = self
-        textView.font = UIFont.systemFont(ofSize: 16.0)
+        textView.font = UIFont.systemFont(ofSize: 18.0)
         textView.backgroundColor = theme.colorForType(.NormalBackground)
         textView.layer.cornerRadius = 5.0
         textView.layer.borderWidth = 0.5
@@ -120,7 +116,7 @@ private extension ChatInputView {
 
         sendButton = UIButton(type: .system)
         sendButton.setTitle(String(localized: "chat_send_button"), for: UIControlState())
-        sendButton.titleLabel?.font = UIFont.antidoteFontWithSize(16.0, weight: .bold)
+        sendButton.titleLabel?.font = UIFont.antidoteFontWithSize(18.0, weight: .bold)
         sendButton.addTarget(self, action: #selector(ChatInputView.sendButtonPressed), for: .touchUpInside)
         sendButton.setContentCompressionResistancePriority(UILayoutPriority.required, for: .horizontal)
         addSubview(sendButton)

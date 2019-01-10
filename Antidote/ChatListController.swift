@@ -10,23 +10,28 @@ protocol ChatListControllerDelegate: class {
 
 class ChatListController: UIViewController {
     weak var delegate: ChatListControllerDelegate?
-
     fileprivate let theme: Theme
     fileprivate weak var submanagerChats: OCTSubmanagerChats!
     fileprivate weak var submanagerObjects: OCTSubmanagerObjects!
-
+    fileprivate weak var submanagerFiles: OCTSubmanagerFiles!
+    fileprivate weak var activeSessionCoordinatorDelegate: ChatPrivateControllerDelegate!
+    
     fileprivate var placeholderLabel: UILabel!
     fileprivate var tableManager: ChatListTableManager!
 
-    init(theme: Theme, submanagerChats: OCTSubmanagerChats, submanagerObjects: OCTSubmanagerObjects) {
+    init(theme: Theme, submanagerChats: OCTSubmanagerChats, submanagerObjects: OCTSubmanagerObjects, submanagerFiles: OCTSubmanagerFiles, activeSessionCoordinatorDelegate: ChatPrivateControllerDelegate!) {
         self.theme = theme
         self.submanagerChats = submanagerChats
         self.submanagerObjects = submanagerObjects
-
+        self.submanagerFiles = submanagerFiles
+        self.activeSessionCoordinatorDelegate = activeSessionCoordinatorDelegate
+        
         super.init(nibName: nil, bundle: nil)
 
         edgesForExtendedLayout = UIRectEdge()
         title = String(localized: "chats_title")
+        
+        self.view.backgroundColor = UIColor.blue
     }
 
     required convenience init?(coder aDecoder: NSCoder) {
@@ -45,7 +50,6 @@ class ChatListController: UIViewController {
 
     override func setEditing(_ editing: Bool, animated: Bool) {
         super.setEditing(editing, animated: animated)
-
         tableManager.tableView.setEditing(editing, animated: animated)
     }
 }
@@ -53,6 +57,21 @@ class ChatListController: UIViewController {
 extension ChatListController: ChatListTableManagerDelegate {
     func chatListTableManager(_ manager: ChatListTableManager, didSelectChat chat: OCTChat) {
         delegate?.chatListController(self, didSelectChat: chat)
+        if let top = self.navigationController?.topViewController as? ChatPrivateController {
+            if top.chat == chat {
+                return
+            }
+        }
+        let controller = ChatPrivateController(
+            theme: theme,
+            chat: chat,
+            submanagerChats: self.submanagerChats,
+            submanagerObjects: self.submanagerObjects,
+            submanagerFiles: self.submanagerFiles,
+            delegate: self.activeSessionCoordinatorDelegate)
+        //self.navigationController?.popToRootViewController(animated: true)
+        self.hidesBottomBarWhenPushed = true
+        self.navigationController?.pushViewController(controller, animated: true)
     }
 
     func chatListTableManager(_ manager: ChatListTableManager, presentAlertController controller: UIAlertController) {
@@ -82,7 +101,7 @@ private extension ChatListController {
 
         tableView.register(ChatListCell.self, forCellReuseIdentifier: ChatListCell.staticReuseIdentifier)
 
-        tableManager = ChatListTableManager(theme: theme, tableView: tableView, submanagerChats: submanagerChats, submanagerObjects: submanagerObjects)
+        tableManager = ChatListTableManager(theme: theme, tableView: tableView, submanagerChats: submanagerChats, submanagerObjects: submanagerObjects, submanagerFiles: submanagerFiles)
         tableManager.delegate = self
     }
 

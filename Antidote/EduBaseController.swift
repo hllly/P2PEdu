@@ -9,6 +9,16 @@
 import UIKit
 
 class EduBaseController: UIViewController {
+    var toxManager: OCTManager!
+    var theme: Theme!
+    var activeSessionCoordinatorDelegate: ChatPrivateControllerDelegate!
+    
+    func getOptions(toxManager: OCTManager, theme: Theme, activeSessionCoordinatorDelegate: ChatPrivateControllerDelegate){
+        self.toxManager = toxManager
+        self.theme = theme
+        self.activeSessionCoordinatorDelegate = activeSessionCoordinatorDelegate
+   
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()

@@ -1,0 +1,11 @@
+/* 
+  des.strings
+  Antidote
+
+  Created by hllly on 2019/1/8.
+  Copyright © 2019年 dvor. All rights reserved.
+*/
+
+/*
+     想在EduMainTabbarController的EduContactController里面引入FriendListController,关键是传入toxManager参数
+ */
