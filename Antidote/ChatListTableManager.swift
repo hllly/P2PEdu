@@ -27,13 +27,14 @@ class ChatListTableManager: NSObject {
     fileprivate let timeFormatter: DateFormatter
 
     fileprivate weak var submanagerChats: OCTSubmanagerChats!
+    fileprivate weak var submanagerFiles: OCTSubmanagerFiles!
 
     fileprivate let chats: Results<OCTChat>
     fileprivate var chatsToken: RLMNotificationToken?
     fileprivate let friends: Results<OCTFriend>
     fileprivate var friendsToken: RLMNotificationToken?
 
-    init(theme: Theme, tableView: UITableView, submanagerChats: OCTSubmanagerChats, submanagerObjects: OCTSubmanagerObjects) {
+    init(theme: Theme, tableView: UITableView, submanagerChats: OCTSubmanagerChats, submanagerObjects: OCTSubmanagerObjects, submanagerFiles: OCTSubmanagerFiles) {
         self.tableView = tableView
 
         self.theme = theme
@@ -42,6 +43,7 @@ class ChatListTableManager: NSObject {
         self.timeFormatter = DateFormatter(type: .time)
 
         self.submanagerChats = submanagerChats
+        self.submanagerFiles = submanagerFiles
 
         self.chats = submanagerObjects.chats().sortedResultsUsingProperty("lastActivityDateInterval", ascending: false)
         self.friends = submanagerObjects.friends()
@@ -123,7 +125,6 @@ extension ChatListTableManager: UITableViewDataSource {
 extension ChatListTableManager: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
-
         let chat = self.chats[indexPath.row]
         delegate?.chatListTableManager(self, didSelectChat: chat)
     }

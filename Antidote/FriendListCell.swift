@@ -7,11 +7,11 @@ import SnapKit
 
 class FriendListCell: BaseCell {
     struct Constants {
-        static let AvatarSize = 30.0
+        static let AvatarSize = 45.0
         static let AvatarLeftOffset = 10.0
         static let AvatarRightOffset = 16.0
 
-        static let TopLabelHeight = 22.0
+        static let TopLabelHeight = 45.0
         static let MinimumBottomLabelHeight = 15.0
 
         static let VerticalOffset = 3.0
@@ -32,14 +32,15 @@ class FriendListCell: BaseCell {
 
         separatorInset.left = CGFloat(Constants.AvatarLeftOffset + Constants.AvatarSize + Constants.AvatarRightOffset)
 
-        avatarView.imageView.image = friendModel.avatar
+        //avatarView.imageView.image = friendModel.avatar
+        avatarView.imageView.image = UIImage(named:"hp")
         avatarView.userStatusView.theme = theme
         avatarView.userStatusView.userStatus = friendModel.status
         avatarView.userStatusView.isHidden = friendModel.hideStatus
 
         topLabel.text = friendModel.topText
         topLabel.textColor = theme.colorForType(.NormalText)
-
+        
         bottomLabel.text = friendModel.bottomText
         bottomLabel.textColor = theme.colorForType(.FriendCellStatus)
         bottomLabel.numberOfLines = friendModel.multilineBottomtext ? 0 : 1

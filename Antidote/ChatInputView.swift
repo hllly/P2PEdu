@@ -10,7 +10,7 @@ private struct Constants {
     static let Offset: CGFloat = 5.0
     static let CameraHorizontalOffset: CGFloat = 10.0
     static let CameraBottomOffset: CGFloat = -10.0
-    static let TextViewMinHeight: CGFloat = 40.0
+    static let TextViewMinHeight: CGFloat = 35.0
 }
 
 protocol ChatInputViewDelegate: class {

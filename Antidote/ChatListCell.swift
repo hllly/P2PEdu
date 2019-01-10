@@ -7,12 +7,12 @@ import SnapKit
 
 class ChatListCell: BaseCell {
     struct Constants {
-        static let AvatarSize = 40.0
+        static let AvatarSize = 50.0
         static let AvatarLeftOffset = 10.0
         static let AvatarRightOffset = 16.0
 
-        static let NicknameLabelHeight = 22.0
-        static let MessageLabelHeight = 22.0
+        static let NicknameLabelHeight = 45.0
+        static let MessageLabelHeight = 10.0
 
         static let NicknameToDateMinOffset = 5.0
         static let DateToArrowOffset = 5.0
@@ -37,7 +37,8 @@ class ChatListCell: BaseCell {
 
         separatorInset.left = CGFloat(Constants.AvatarLeftOffset + Constants.AvatarSize + Constants.AvatarRightOffset)
 
-        avatarView.imageView.image = chatModel.avatar
+        //avatarView.imageView.image = chatModel.avatar
+        avatarView.imageView.image = UIImage(named:"hp")
         avatarView.userStatusView.theme = theme
         avatarView.userStatusView.userStatus = chatModel.status
 

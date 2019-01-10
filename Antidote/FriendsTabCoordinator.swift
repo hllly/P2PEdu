@@ -17,14 +17,12 @@ class FriendsTabCoordinator: ActiveSessionNavigationCoordinator {
 
     init(theme: Theme, toxManager: OCTManager) {
         self.toxManager = toxManager
-
         super.init(theme: theme)
     }
 
     override func startWithOptions(_ options: CoordinatorOptions?) {
         let controller = FriendListController(theme: theme, submanagerObjects: toxManager.objects, submanagerFriends: toxManager.friends, submanagerChats: toxManager.chats, submanagerUser: toxManager.user)
         controller.delegate = self
-
         navigationController.pushViewController(controller, animated: false)
     }
 
@@ -39,11 +37,10 @@ class FriendsTabCoordinator: ActiveSessionNavigationCoordinator {
 }
 
 extension FriendsTabCoordinator: FriendListControllerDelegate {
+    //处理friend被选中的响应代码
     func friendListController(_ controller: FriendListController, didSelectFriend friend: OCTFriend) {
         let controller = FriendCardController(theme: theme, friend: friend, submanagerObjects: toxManager.objects)
         controller.delegate = self
-
-        navigationController.pushViewController(controller, animated: true)
     }
 
     func friendListController(_ controller: FriendListController, didSelectRequest request: OCTFriendRequest) {
@@ -60,9 +57,7 @@ extension FriendsTabCoordinator: FriendListControllerDelegate {
     func friendListController(_ controller: FriendListController, showQRCodeWithText text: String) {
         let controller = QRViewerController(theme: theme, text: text)
         controller.delegate = self
-
         let toPresent = UINavigationController(rootViewController: controller)
-
         navigationController.present(toPresent, animated: true, completion: nil)
     }
 }

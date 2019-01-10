@@ -10,7 +10,7 @@ import Photos
 private struct Constants {
     static let MessagesPortionSize = 50
 
-    static let InputViewTopOffset: CGFloat = 50.0
+    static let InputViewTopOffset: CGFloat = -50.0
 
     static let NewMessageViewAllowedDelta: CGFloat = 20.0
     static let NewMessageViewEdgesOffset: CGFloat = 5.0
@@ -77,7 +77,7 @@ class ChatPrivateController: KeyboardNotificationController {
     fileprivate let showKeyboardOnAppear: Bool
     fileprivate var disableNextInputViewAnimation = false
 
-    init(theme: Theme, chat: OCTChat, submanagerChats: OCTSubmanagerChats, submanagerObjects: OCTSubmanagerObjects, submanagerFiles: OCTSubmanagerFiles, delegate: ChatPrivateControllerDelegate, showKeyboardOnAppear: Bool = false) {
+    init(theme: Theme, chat: OCTChat, submanagerChats: OCTSubmanagerChats, submanagerObjects: OCTSubmanagerObjects, submanagerFiles: OCTSubmanagerFiles, delegate: ChatPrivateControllerDelegate) {
         self.theme = theme
         self.chat = chat
         self.friend = chat.friends.lastObject() as? OCTFriend
@@ -85,7 +85,7 @@ class ChatPrivateController: KeyboardNotificationController {
         self.submanagerObjects = submanagerObjects
         self.submanagerFiles = submanagerFiles
         self.delegate = delegate
-        self.showKeyboardOnAppear = showKeyboardOnAppear
+        self.showKeyboardOnAppear = false
 
         let predicate = NSPredicate(format: "chatUniqueIdentifier == %@", chat.uniqueIdentifier)
         self.messages = submanagerObjects.messages(predicate: predicate).sortedResultsUsingProperty("dateInterval", ascending: false)
@@ -129,7 +129,6 @@ class ChatPrivateController: KeyboardNotificationController {
 
     override func loadView() {
         loadViewWithBackgroundColor(theme.colorForType(.NormalBackground))
-
         createTableView()
         createNewMessagesView()
         createInputView()
@@ -139,29 +138,24 @@ class ChatPrivateController: KeyboardNotificationController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
         addMessagesNotification()
-
         createNavigationViews()
         addFriendNotification()
     }
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-
         updateLastReadDate()
         delegate?.chatPrivateControllerWillAppear(self)
     }
 
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-
         delegate?.chatPrivateControllerWillDisappear(self)
     }
 
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-
         if showKeyboardOnAppear {
             disableNextInputViewAnimation = true
             _ = chatInputView.becomeFirstResponder()
@@ -170,13 +164,10 @@ class ChatPrivateController: KeyboardNotificationController {
 
     override func keyboardWillShowAnimated(keyboardFrame frame: CGRect) {
         super.keyboardWillShowAnimated(keyboardFrame: frame)
-
         guard let constraint = chatInputViewBottomConstraint else {
             return
         }
-
         constraint.update(offset: -frame.size.height)
-
         if disableNextInputViewAnimation {
             disableNextInputViewAnimation = false
 
@@ -195,9 +186,7 @@ class ChatPrivateController: KeyboardNotificationController {
         guard let constraint = chatInputViewBottomConstraint else {
             return
         }
-
         constraint.update(offset: 0.0)
-
         if disableNextInputViewAnimation {
             disableNextInputViewAnimation = false
 
@@ -212,7 +201,6 @@ class ChatPrivateController: KeyboardNotificationController {
 
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
-
         updateInputViewMaxHeight()
     }
 }
@@ -227,10 +215,8 @@ extension ChatPrivateController {
         guard let tableView = tableView else {
             return
         }
-
         let translation = recognizer.translation(in: recognizer.view)
         recognizer.setTranslation(CGPoint.zero, in: recognizer.view)
-
         _ = tableView.visibleCells.filter {
             $0 is ChatMovableDateCell
         }.map {
@@ -746,10 +732,8 @@ private extension ChatPrivateController {
                     self.updateTableViewWithDeletions(deletions)
                     self.updateTableViewWithInsertions(insertions)
                     self.updateTableViewWithModifications(modifications)
-
                     self.visibleMessages = self.visibleMessages + insertions.count - deletions.count
                     tableView.endUpdates()
-
                     if insertions.contains(0) {
                         self.handleNewMessage()
                     }
