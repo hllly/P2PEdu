@@ -441,6 +441,9 @@
 		4E277C7E21E451B60082B1B9 /* EduTabbarConfig.plist in Resources */ = {isa = PBXBuildFile; fileRef = 4E277C7D21E451B60082B1B9 /* EduTabbarConfig.plist */; };
 		4E277C8021E455410082B1B9 /* EduBaseController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E277C7F21E455410082B1B9 /* EduBaseController.swift */; };
 		4E277C8221E455600082B1B9 /* EduBaseNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E277C8121E455600082B1B9 /* EduBaseNavigationController.swift */; };
+		4E3C59C021E8458D0072E7E9 /* CanvasController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E3C59BF21E8458D0072E7E9 /* CanvasController.swift */; };
+		4E3C5A1D21E89B730072E7E9 /* CanvasBoard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E3C5A1C21E89B730072E7E9 /* CanvasBoard.swift */; };
+		4E3C5A2521E8D5050072E7E9 /* FSTool.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E3C5A2421E8D5050072E7E9 /* FSTool.swift */; };
 		4E4698E221E59341000FE020 /* FriendListController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E4698E121E591EA000FE020 /* FriendListController.swift */; };
 		4E4698E321E59341000FE020 /* FriendListController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E4698E121E591EA000FE020 /* FriendListController.swift */; };
 		4E4698E421E59341000FE020 /* FriendListController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E4698E121E591EA000FE020 /* FriendListController.swift */; };
@@ -929,6 +932,9 @@
 		4E277C7D21E451B60082B1B9 /* EduTabbarConfig.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = EduTabbarConfig.plist; sourceTree = "<group>"; };
 		4E277C7F21E455410082B1B9 /* EduBaseController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EduBaseController.swift; sourceTree = "<group>"; };
 		4E277C8121E455600082B1B9 /* EduBaseNavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EduBaseNavigationController.swift; sourceTree = "<group>"; };
+		4E3C59BF21E8458D0072E7E9 /* CanvasController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CanvasController.swift; sourceTree = "<group>"; };
+		4E3C5A1C21E89B730072E7E9 /* CanvasBoard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CanvasBoard.swift; sourceTree = "<group>"; };
+		4E3C5A2421E8D5050072E7E9 /* FSTool.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FSTool.swift; sourceTree = "<group>"; };
 		4E4698E121E591EA000FE020 /* FriendListController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendListController.swift; sourceTree = "<group>"; };
 		6A1B3D525D11BDD4F3E9B831 /* libPods-ScreenshotsUITests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-ScreenshotsUITests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		72586F4D098584EF43024224 /* libPods-AntidoteTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-AntidoteTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -1235,6 +1241,7 @@
 				1173F06D1BC5D9BA00B88B7B /* Theme.swift */,
 				1117829E1DC53AB4000C1721 /* ToxFactory.swift */,
 				1164C8D71BC922EB00B91107 /* UserDefaultsManager.swift */,
+				4E3C5A2421E8D5050072E7E9 /* FSTool.swift */,
 			);
 			name = Classes;
 			sourceTree = "<group>";
@@ -1415,6 +1422,8 @@
 			isa = PBXGroup;
 			children = (
 				11A21EFA1C45BDB100E80A89 /* ChatPrivateController.swift */,
+				4E3C59BF21E8458D0072E7E9 /* CanvasController.swift */,
+				4E3C5A1C21E89B730072E7E9 /* CanvasBoard.swift */,
 			);
 			name = Chat;
 			sourceTree = "<group>";
@@ -2107,6 +2116,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4E3C5A1D21E89B730072E7E9 /* CanvasBoard.swift in Sources */,
 				11628E721CA580ED008C097E /* ChatGenericFileCell.swift in Sources */,
 				116634AF1C6F40820072C980 /* ChatOutgoingCallCellModel.swift in Sources */,
 				116634B21C7087A80072C980 /* UIApplicationExtension.swift in Sources */,
@@ -2141,6 +2151,7 @@
 				4E4698E321E59341000FE020 /* FriendListController.swift in Sources */,
 				116634E91C7B8D7C0072C980 /* StaticTableInfoCellModel.swift in Sources */,
 				11CFCD0D1C27488E0046BD94 /* ImageViewWithStatus.swift in Sources */,
+				4E3C5A2521E8D5050072E7E9 /* FSTool.swift in Sources */,
 				11B2535D1C4BACDB0068F47C /* TabBarController.swift in Sources */,
 				9CB1F9511D58CA4000105858 /* RunningCoordinator.swift in Sources */,
 				11628E6C1CA57B19008C097E /* ChatOutgoingFileCellModel.swift in Sources */,
@@ -2268,6 +2279,7 @@
 				9C2EF37A1C4E2DDE006E7AB1 /* ChatListTableManager.swift in Sources */,
 				112E4EDF1C675C58004312CF /* CallActiveController.swift in Sources */,
 				11628E751CA5811C008C097E /* ChatGenericFileCellModel.swift in Sources */,
+				4E3C59C021E8458D0072E7E9 /* CanvasController.swift in Sources */,
 				11A21EFB1C45BDB100E80A89 /* ChatPrivateController.swift in Sources */,
 				1164C8E91BC929F700B91107 /* LoginChoiceController.swift in Sources */,
 				1117827E1DC52CBA000C1721 /* OCTSubmanagerCallsMock.swift in Sources */,

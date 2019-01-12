@@ -26,12 +26,15 @@ private struct Constants {
 
 protocol ChatPrivateControllerDelegate: class {
     func chatPrivateControllerWillAppear(_ controller: ChatPrivateController)
-    func chatPrivateControllerWillDisappear(_ controller: ChatPrivateController)
+    func chatPrivateControllerWillDisappear(_ controller: ChatPrivateController, tabbarIsHidden: Bool)
     func chatPrivateControllerCallToChat(_ controller: ChatPrivateController, enableVideo: Bool)
     func chatPrivateControllerShowQuickLookController(
             _ controller: ChatPrivateController,
             dataSource: QuickLookPreviewControllerDataSource,
             selectedIndex: Int)
+    //ad by hll,启动画板
+    func chatPrivateControllerCallToCanvas(_ controller: ChatPrivateController)
+    func chatPrivateControllerStopCanvas(_ controller: ChatPrivateController)
 }
 
 class ChatPrivateController: KeyboardNotificationController {
@@ -57,6 +60,10 @@ class ChatPrivateController: KeyboardNotificationController {
 
     fileprivate var audioButton: UIBarButtonItem!
     fileprivate var videoButton: UIBarButtonItem!
+    //ad by hll
+    fileprivate var canvasButton: UIBarButtonItem!
+    //默认为0，如果为1表示当前页面是canvas,所以tabbar要隐藏
+    fileprivate var currentView: Int!
 
     fileprivate var titleView: ChatPrivateTitleView!
     fileprivate var tableView: UITableView?
@@ -86,6 +93,7 @@ class ChatPrivateController: KeyboardNotificationController {
         self.submanagerFiles = submanagerFiles
         self.delegate = delegate
         self.showKeyboardOnAppear = false
+        self.currentView = 0
 
         let predicate = NSPredicate(format: "chatUniqueIdentifier == %@", chat.uniqueIdentifier)
         self.messages = submanagerObjects.messages(predicate: predicate).sortedResultsUsingProperty("dateInterval", ascending: false)
@@ -144,14 +152,21 @@ class ChatPrivateController: KeyboardNotificationController {
     }
 
     override func viewWillAppear(_ animated: Bool) {
+        self.currentView = 0
         super.viewWillAppear(animated)
         updateLastReadDate()
         delegate?.chatPrivateControllerWillAppear(self)
     }
 
     override func viewWillDisappear(_ animated: Bool) {
+        var tabbarIsHidden: Bool
+        if self.currentView == 0 {
+            tabbarIsHidden = false
+        }else {
+            tabbarIsHidden = true
+        }
         super.viewWillDisappear(animated)
-        delegate?.chatPrivateControllerWillDisappear(self)
+        delegate?.chatPrivateControllerWillDisappear(self, tabbarIsHidden: tabbarIsHidden)
     }
 
     override func viewDidAppear(_ animated: Bool) {
@@ -264,6 +279,14 @@ extension ChatPrivateController {
 
     @objc func videoCallButtonPressed() {
         delegate?.chatPrivateControllerCallToChat(self, enableVideo: true)
+    }
+    
+    @objc func canvasCallButtonPressed() {
+        self.currentView = 1
+        delegate?.chatPrivateControllerCallToCanvas(self)
+        let canvasController = CanvasController(chat: chat, chats: submanagerChats)
+        self.hidesBottomBarWhenPushed = true
+        self.navigationController?.pushViewController(canvasController, animated: true)
     }
 
     @objc func editMessagesDeleteButtonPressed(_ barButtonItem: UIBarButtonItem) {
@@ -661,7 +684,7 @@ private extension ChatPrivateController {
         label.text = String(localized: "chat_new_messages")
         label.textColor = theme.colorForType(.ConnectingText)
         label.backgroundColor = .clear
-        label.font = UIFont.systemFont(ofSize: 12.0)
+        label.font = UIFont.systemFont(ofSize: 15.0)
         newMessagesView.addSubview(label)
 
         let button = UIButton()
@@ -806,6 +829,7 @@ private extension ChatPrivateController {
             titleView.userStatus = UserStatus(connectionStatus: .none, userStatus: .none)
             audioButton.isEnabled = false
             videoButton.isEnabled = false
+            canvasButton.isEnabled = false
             chatInputView.buttonsEnabled = false
             return
         }
@@ -832,6 +856,7 @@ private extension ChatPrivateController {
 
                     self.audioButton.isEnabled = isConnected
                     self.videoButton.isEnabled = isConnected
+                    self.canvasButton.isEnabled = isConnected
                     self.chatInputView.buttonsEnabled = isConnected
                 case .error(let error):
                     fatalError("\(error)")
@@ -1087,14 +1112,17 @@ private extension ChatPrivateController {
         else {
             let audioImage = UIImage(named: "start-call-medium")!
             let videoImage = UIImage(named: "video-call-medium")!
+            let canvasImage = UIImage(named: "write-small")!
 
             audioButton = UIBarButtonItem(image: audioImage, style: .plain, target: self, action: #selector(ChatPrivateController.audioCallButtonPressed))
             videoButton = UIBarButtonItem(image: videoImage, style: .plain, target: self, action: #selector(ChatPrivateController.videoCallButtonPressed))
+            canvasButton = UIBarButtonItem(image: canvasImage, style: .plain, target: self, action: #selector(ChatPrivateController.canvasCallButtonPressed))
 
             navigationItem.leftBarButtonItems = nil
             navigationItem.rightBarButtonItems = [
                 videoButton,
                 audioButton,
+                canvasButton,
             ]
         }
     }

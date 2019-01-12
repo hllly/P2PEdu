@@ -82,7 +82,7 @@
 "pin_lock_5_minutes" = "5 Minutes";
 
 /* Label shown when connecting to Tox network */
-"connecting_label" = "Connecting...";
+"connecting_label" = "连接中...";
 
 /* Tab name and screen name */
 "contacts_title" = "联系人";
@@ -165,13 +165,13 @@
 /* Chats screen message text */
 "chat_incoming_file" = "Incoming file:";
 /* Chats screen message text */
-"chat_call_finished" = "Call finished";
+"chat_call_finished" = "通话结束";
 /* Chats screen message text */
-"chat_unanwered_call" = "Unanswered call";
+"chat_unanwered_call" = "未接通电话";
 /* Chat button */
 "chat_send_button" = "发  送";
 /* Chat notification toast */
-"chat_new_messages" = "↓ New messages";
+"chat_new_messages" = "↓ 新消息";
 /* Chat call information */
 "chat_call_message" = "Call, ";
 /* Chat call information */
@@ -180,16 +180,16 @@
 "chat_more_menu_item" = "More";
 
 /* Status message */
-"status_offline" = "Offline";
+"status_offline" = "离线";
 /* Status message */
-"status_online" = "Online";
+"status_online" = "在线";
 /* Status message */
-"status_away" = "Away";
+"status_away" = "离开";
 /* Status message */
-"status_busy" = "Busy";
+"status_busy" = "繁忙";
 
 /* Notification text */
-"notification_new_message" = "New message";
+"notification_new_message" = "新消息";
 /* Notification text */
 "notification_incoming_contact_request" = "Incoming contact request";
 /* Notification text */

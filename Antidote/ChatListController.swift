@@ -15,7 +15,7 @@ class ChatListController: UIViewController {
     fileprivate weak var submanagerObjects: OCTSubmanagerObjects!
     fileprivate weak var submanagerFiles: OCTSubmanagerFiles!
     fileprivate weak var activeSessionCoordinatorDelegate: ChatPrivateControllerDelegate!
-    
+   
     fileprivate var placeholderLabel: UILabel!
     fileprivate var tableManager: ChatListTableManager!
 

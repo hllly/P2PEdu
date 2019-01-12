@@ -67,17 +67,17 @@ extension ChatsTabCoordinator: ChatListControllerDelegate {
 extension ChatsTabCoordinator: ChatPrivateControllerDelegate {
     func chatPrivateControllerWillAppear(_ controller: ChatPrivateController) {
         delegate?.chatsTabCoordinator(self, chatWillAppear: controller.chat)
-        print("===================1")
+        //print("===================1")
     }
 
-    func chatPrivateControllerWillDisappear(_ controller: ChatPrivateController) {
+    func chatPrivateControllerWillDisappear(_ controller: ChatPrivateController, tabbarIsHidden: Bool) {
         delegate?.chatsTabCoordinator(self, chatWillDisapper: controller.chat)
-        print("===================2")
+        //print("===================2")
     }
 
     func chatPrivateControllerCallToChat(_ controller: ChatPrivateController, enableVideo: Bool) {
         delegate?.chatsTabCoordinator(self, callToChat: controller.chat, enableVideo: enableVideo)
-        print("===================3")
+        //print("===================3")
     }
 
     func chatPrivateControllerShowQuickLookController(
@@ -85,11 +85,20 @@ extension ChatsTabCoordinator: ChatPrivateControllerDelegate {
             dataSource: QuickLookPreviewControllerDataSource,
             selectedIndex: Int)
     {
-        print("===================4")
+        //print("===================4")
         let controller = QuickLookPreviewController()
         controller.dataSource = dataSource
         controller.dataSourceStorage = dataSource
         controller.currentPreviewItemIndex = selectedIndex
         navigationController.present(controller, animated: true, completion: nil)
+    }
+    
+    //ad by hll,启动画板
+    func chatPrivateControllerCallToCanvas(_ controller: ChatPrivateController){
+        //print("========================5")
+    }
+    
+    //add by hll结束画板
+    func chatPrivateControllerStopCanvas(_ controller: ChatPrivateController){
     }
 }

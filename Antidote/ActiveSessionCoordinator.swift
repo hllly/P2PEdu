@@ -130,7 +130,6 @@ extension ActiveSessionCoordinator: TopCoordinatorProtocol {
                 self.mainTabbar = EduMainTabbarController(toxManager: self.toxManager, theme: self.theme, activeSessionCoordinatorDelegate: self)
                 window.rootViewController = self.mainTabbar
         }
-
         var settingsOptions: CoordinatorOptions?
 
         let toShow = options?[Options.ToShowKey] as? Options.Coordinator ?? .none
@@ -347,28 +346,41 @@ extension ActiveSessionCoordinator: PrimaryIpadControllerDelegate {
 
 extension ActiveSessionCoordinator: ChatPrivateControllerDelegate {
     func chatPrivateControllerWillAppear(_ controller: ChatPrivateController) {
-        print("======================1")
+        //print("======================1")
         mainTabbar.mainTabbarView.isHidden = true
         notificationCoordinator.banNotificationsForChat(controller.chat)
     }
 
-    func chatPrivateControllerWillDisappear(_ controller: ChatPrivateController) {
-        print("======================2")
-        mainTabbar.mainTabbarView.isHidden = false
+    func chatPrivateControllerWillDisappear(_ controller: ChatPrivateController, tabbarIsHidden: Bool) {
+        //print("======================2")
+        mainTabbar.mainTabbarView.isHidden = tabbarIsHidden
         notificationCoordinator.unbanNotificationsForChat(controller.chat)
     }
 
     func chatPrivateControllerCallToChat(_ controller: ChatPrivateController, enableVideo: Bool) {
-        print("======================3")
+        //print("======================3")
         callCoordinator.callToChat(controller.chat, enableVideo: enableVideo)
     }
+    
+    //ad by hll,启动画板
+    func chatPrivateControllerCallToCanvas(_ controller: ChatPrivateController){
+        //print("========================4")
+        mainTabbar.mainTabbarView.isHidden = true
+    }
+    
+    //ad by hll,启动画板
+    func chatPrivateControllerStopCanvas(_ controller: ChatPrivateController){
+        //print("========================5")
+        mainTabbar.mainTabbarView.isHidden = false
+    }
+
 
     func chatPrivateControllerShowQuickLookController(
             _ controller: ChatPrivateController,
             dataSource: QuickLookPreviewControllerDataSource,
             selectedIndex: Int)
     {
-        print("======================4")
+        //print("======================4")
         let controller = QuickLookPreviewController()
         controller.dataSource = dataSource
         controller.dataSourceStorage = dataSource

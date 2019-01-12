@@ -32,7 +32,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
         return true
     }
-
+  
+    
     func applicationDidEnterBackground(_ application: UIApplication) {
         backgroundTask = UIApplication.shared.beginBackgroundTask (expirationHandler: { [unowned self] in
             UIApplication.shared.endBackgroundTask(self.backgroundTask)
