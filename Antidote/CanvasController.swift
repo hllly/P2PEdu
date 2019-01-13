@@ -24,11 +24,8 @@ class CanvasController: UIViewController {
         fatalError("init(coder:) has not been implemented")
     }
     
+    
     override func viewDidLoad() {
-        let fs = FSTool()
-        if fs.exist(path: "/Documents/paper.png") {
-            fs.deleteFile(path: "/Documents/paper.png")
-        }
         self.canvasBoard = CanvasBoard(frame:self.view.frame, backImg: UIImage(named: "paper")!, chat: chat, chats: chats)
         self.view.addSubview(canvasBoard)
     }

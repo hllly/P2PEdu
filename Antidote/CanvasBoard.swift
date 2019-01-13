@@ -25,13 +25,13 @@ class CanvasBoard: UIImageView {
     var networkPoints: [(points:[CGPoint], forces:[CGFloat])]!
     
     // 当前半径
-    var currentWidth:CGFloat = 1
+    var currentWidth:CGFloat = 2
     // 初始图片
     var defaultImage:UIImage?
     // 上次图片
     var lastImage:UIImage?
     // 最大和最小宽度
-    let minWidth:CGFloat = 1
+    let minWidth:CGFloat = 2
     let maxWidth:CGFloat = 3
     // 设置调试
     let DEBUG = false
@@ -76,7 +76,7 @@ class CanvasBoard: UIImageView {
     @objc func btnClick() {
         image = defaultImage
         lastImage = defaultImage
-        currentWidth = 1
+        currentWidth = 2
     }
 
     /**
@@ -324,8 +324,8 @@ extension CanvasBoard {
                 // Fallback on earlier versions
             };
         }
-        networkPoints.append((points:points, forces:pointForces))
-        chats.sendMessage(to: chat, text: "hello wrold1", type: .normal, successBlock: nil, failureBlock: nil)
+        //networkPoints.append((points:points, forces:pointForces))
+        //chats.sendMessage(to: chat, text: "hello wrold1", type: .normal, successBlock: nil, failureBlock: nil)
         currentWidth = 13
         changeImage()
     }
@@ -348,8 +348,8 @@ extension CanvasBoard {
                 // Fallback on earlier versions
             };
         }
-        networkPoints.append((points:points, forces:pointForces))
-        chats.sendMessage(to: chat, text: "hello wrold", type: .normal, successBlock: nil, failureBlock: nil)
+        //networkPoints.append((points:points, forces:pointForces))
+        //chats.sendMessage(to: chat, text: "hello wrold", type: .normal, successBlock: nil, failureBlock: nil)
         changeImage()
     }
 
